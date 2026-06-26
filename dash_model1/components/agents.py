@@ -11,7 +11,7 @@ import os
 import duckdb
 import pandas as pd
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 QUERY_TEMPLATES = {
     "Glycemic status breakdown": """

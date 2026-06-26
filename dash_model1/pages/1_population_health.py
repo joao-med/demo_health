@@ -14,7 +14,7 @@ from components.panel_builder import (
     STRATIFY_OPTIONS,
 )
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 
 @st.cache_data(show_spinner=False)

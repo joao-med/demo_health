@@ -11,7 +11,7 @@ import sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 GEOJSON_PATH = "data/countries.geojson"
 GEOJSON_URL = (
     "https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson"

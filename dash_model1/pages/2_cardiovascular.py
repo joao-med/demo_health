@@ -15,7 +15,7 @@ from components.panel_builder import (
     CV_STRATIFY_OPTIONS,
 )
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 RISK_ORDER = [
     "Very High - Severe Hypercholesterolemia",

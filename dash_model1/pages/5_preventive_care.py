@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import altair as alt
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 SCREENING_LABELS = {
     "mammography": "Mammography",

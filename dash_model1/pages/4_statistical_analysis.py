@@ -5,7 +5,7 @@ import numpy as np
 import altair as alt
 from scipy import stats
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 BIOMARKER_LABELS = {
     "hba1c": "HbA1c (%)",

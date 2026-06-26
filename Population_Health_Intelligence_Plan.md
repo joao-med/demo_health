@@ -6,7 +6,7 @@
 
 ## What This Is
 
-OpenHealth already solves the hardest part: ingesting raw lab data from any source and delivering clean, structured biomarker records through its Lab API. What this plan adds is an **analytics intelligence layer** — a multi-tenant dashboard that transforms those harmonized biomarker records into population health insights that stakeholders can act on.
+the platform already solves the hardest part: ingesting raw lab data from any source and delivering clean, structured biomarker records through its Lab API. What this plan adds is an **analytics intelligence layer** — a multi-tenant dashboard that transforms those harmonized biomarker records into population health insights that stakeholders can act on.
 
 The core design principle is a **layered onion model**: one codebase, one database, filtered by identity. When the CEO logs in, they see all clients. When a health plan logs in, they see only their population — same dashboard, same analytics, scoped to their data. Every analytical result is computed from the same clinical logic, so benchmarking across populations is apples-to-apples.
 

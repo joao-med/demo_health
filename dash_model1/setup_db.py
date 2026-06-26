@@ -1,7 +1,7 @@
 import duckdb
 import os
 
-DB_PATH = "openhealth.duckdb"
+DB_PATH = "analytics.duckdb"
 
 
 def main():

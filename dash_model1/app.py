@@ -10,7 +10,7 @@ os.chdir(_APP_DIR)
 load_dotenv()
 
 st.set_page_config(
-    page_title="OpenHealth Analytics",
+    page_title="Population Health Analytics",
     page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -19,7 +19,7 @@ st.set_page_config(
 
 def _init_database():
     """Generate synthetic data and build DuckDB on first run (Streamlit Cloud)."""
-    if os.path.exists("openhealth.duckdb"):
+    if os.path.exists("analytics.duckdb"):
         return
     with st.spinner("Initialising demo database — this takes about 30 seconds on first run..."):
         sys.path.insert(0, _APP_DIR)
@@ -54,7 +54,7 @@ PASSWORDS = _load_passwords()
 def login_page():
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        st.markdown("## OpenHealth Analytics")
+        st.markdown("## Population Health Analytics")
         st.markdown("Population Health Dashboard")
         st.divider()
 
