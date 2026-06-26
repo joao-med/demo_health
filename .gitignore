@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+*.duckdb
+*.wal
+data/
+venv/
+.venv/
+*.parquet
+*.csv
+.DS_Store
+push_to_github.ps1

@@ -1,0 +1,14 @@
+streamlit>=1.36.0
+duckdb
+pandas
+numpy
+scipy
+faker
+altair
+python-dotenv
+requests
+statsmodels
+pyarrow
+folium
+streamlit-folium
+anthropic
