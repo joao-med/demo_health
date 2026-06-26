@@ -255,3 +255,4 @@ if selected_country != "All":
             use_container_width=True,
             hide_index=True,
         )
+ 

@@ -205,3 +205,4 @@ class AnalystAgent:
         )
         text = message.content[0].text.strip()
         return text + "\n\n_AI-generated summary — verify before sharing._"
+ 

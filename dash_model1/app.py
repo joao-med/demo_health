@@ -201,7 +201,4 @@ def main():
 
     pg.run()
 
-    st.markdown(CHAT_BUBBLE, unsafe_allow_html=True)
-
-
-main()
+    st.markdown(CHAT_BUBBLE, unsafe_allow_html=Tr
