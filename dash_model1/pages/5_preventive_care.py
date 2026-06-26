@@ -72,7 +72,6 @@ def run():
         st.warning("No screening compliance data available.")
         return
 
-    # Sidebar filters
     with st.sidebar:
         st.subheader("Filters")
 
@@ -113,9 +112,6 @@ def run():
         return
 
     n_eligible = df_f["patient_id"].nunique()
-    n_up_to_date = df_f[df_f["compliance_status"] == "Up to Date"]["patient_id"].nunique()
-    n_overdue = df_f[df_f["compliance_status"] == "Overdue"]["patient_id"].nunique()
-    n_no_data = df_f[df_f["compliance_status"] == "No Data"]["patient_id"].nunique()
     total_slots = len(df_f)
     pct_covered = (df_f["compliance_status"] == "Up to Date").sum() / max(total_slots, 1)
     pct_overdue = (df_f["compliance_status"] == "Overdue").sum() / max(total_slots, 1)
@@ -125,13 +121,12 @@ def run():
     k1, k2, k3, k4, k5 = st.columns(5)
     k1.metric("Eligible patients", f"{n_eligible:,}")
     k2.metric("Screening slots", f"{total_slots:,}")
-    k3.metric("Up to Date", f"{pct_covered:.1%}", help="% of screening slots where patient is current")
-    k4.metric("Overdue", f"{pct_overdue:.1%}", help="% of screening slots past due interval")
-    k5.metric("No Record", f"{(1 - pct_covered - pct_overdue):.1%}", help="% with no screening record")
+    k3.metric("Up to Date", f"{pct_covered:.1%}")
+    k4.metric("Overdue", f"{pct_overdue:.1%}")
+    k5.metric("No Record", f"{(1 - pct_covered - pct_overdue):.1%}")
 
     st.divider()
 
-    # Compliance by screening type
     st.subheader("Compliance by Screening Type")
 
     type_counts = (
@@ -169,7 +164,6 @@ def run():
     )
     st.altair_chart(bar_chart, use_container_width=True)
 
-    # Coverage detail table per screening
     st.subheader("Coverage Summary")
     summary_rows = []
     for s_type in (selected_screenings or list(SCREENING_LABELS.keys())):
@@ -196,12 +190,10 @@ def run():
 
     st.divider()
 
-    # Overdue trend: overdue rate by age group and sex
     left_col, right_col = st.columns(2)
 
     with left_col:
         st.subheader("Overdue Rate by Age Group")
-        df_f["age_group"] = df_f["age"].apply(age_group)
         age_compliance = (
             df_f.groupby(["age_group", "compliance_status"])
             .size()
@@ -271,39 +263,11 @@ def run():
             st.altair_chart(heat + text, use_container_width=True)
         else:
             st.info("Stakeholder heatmap available in admin view.")
-            sex_comp = (
-                df_f.groupby(["sex", "compliance_status"])
-                .size()
-                .reset_index(name="count")
-            )
-            sex_comp["total"] = sex_comp.groupby("sex")["count"].transform("sum")
-            sex_comp["pct"] = sex_comp["count"] / sex_comp["total"]
-            sex_bar = (
-                alt.Chart(sex_comp)
-                .mark_bar()
-                .encode(
-                    x=alt.X("sex:N", title="Sex"),
-                    y=alt.Y("pct:Q", axis=alt.Axis(format=".0%"), title="% of slots"),
-                    color=alt.Color(
-                        "compliance_status:N",
-                        scale=alt.Scale(
-                            domain=STATUS_ORDER,
-                            range=[STATUS_COLORS[s] for s in STATUS_ORDER],
-                        ),
-                        legend=None,
-                    ),
-                    order=alt.Order("compliance_status:N", sort="descending"),
-                    tooltip=["sex:N", "compliance_status:N", alt.Tooltip("pct:Q", format=".1%")],
-                )
-                .properties(height=260)
-            )
-            st.altair_chart(sex_bar, use_container_width=True)
 
     st.divider()
 
-    # Patient-level table
     with st.expander("Patient-level detail"):
-        st.caption("One row per patient per screening type. Filter using sidebar controls.")
+        st.caption("One row per patient per screening type.")
         pivot = (
             df_f.pivot_table(
                 index=["patient_id", "age", "sex", "stakeholder"],
@@ -323,4 +287,3 @@ def run():
 
 
 run()
- 

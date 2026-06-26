@@ -122,8 +122,6 @@ def build_region_stats(df_flags, df_geo, country):
     return pd.DataFrame(rows)
 
 
-# Load
-
 role = st.session_state.get("role", "admin")
 stakeholder_id = st.session_state.get("stakeholder_id", None)
 
@@ -165,7 +163,6 @@ with col_map:
         st.warning("GeoJSON unavailable - no internet connection. Showing table only.")
     else:
         m = folium.Map(location=[20, 5], zoom_start=2, tiles="CartoDB positron")
-
         folium.Choropleth(
             geo_data=geojson,
             data=country_stats,
@@ -178,7 +175,6 @@ with col_map:
             nan_fill_color="#e8e8e8",
             highlight=True,
         ).add_to(m)
-
         st_folium(m, width=700, height=420, returned_objects=[])
 
 with col_table:
@@ -194,7 +190,7 @@ with col_table:
 st.divider()
 
 if selected_country != "All":
-    st.subheader(f"Regional breakdown — {selected_country}")
+    st.subheader(f"Regional breakdown - {selected_country}")
     region_stats = build_region_stats(df_flags, df_geo, selected_country)
 
     if region_stats.empty:
@@ -255,4 +251,3 @@ if selected_country != "All":
             use_container_width=True,
             hide_index=True,
         )
- 
