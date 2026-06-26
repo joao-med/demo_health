@@ -6,6 +6,8 @@ import sys
 # Ensure CWD is the app directory so all relative paths (DB, data/) resolve correctly
 _APP_DIR = os.path.dirname(os.path.abspath(__file__))
 os.chdir(_APP_DIR)
+if _APP_DIR not in sys.path:
+    sys.path.insert(0, _APP_DIR)
 
 load_dotenv()
 
@@ -18,11 +20,9 @@ st.set_page_config(
 
 
 def _init_database():
-    """Generate synthetic data and build DuckDB on first run (Streamlit Cloud)."""
     if os.path.exists("analytics.duckdb"):
         return
     with st.spinner("Initialising demo database — this takes about 30 seconds on first run..."):
-        sys.path.insert(0, _APP_DIR)
         import generate_data
         import setup_db
         generate_data.main()
@@ -201,4 +201,7 @@ def main():
 
     pg.run()
 
-    st.markdown(CHAT_BUBBLE, unsafe_allow_html=Tr
+    st.markdown(CHAT_BUBBLE, unsafe_allow_html=True)
+
+
+main()
